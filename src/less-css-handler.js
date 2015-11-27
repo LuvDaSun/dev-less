@@ -1,10 +1,11 @@
 var path = require('path');
 var fs = require('fs');
 var less = require('less');
+var assign = require('object-assign');
 
 
 module.exports = function(basePath, options) {
-    options = Object.assign({
+    options = assign({
         plugins: [],
         extname: ".less"
     }, options);
@@ -48,7 +49,7 @@ function statFileOrNull(srcPath, cb) {
 
 
 function renderLessFile(srcPath, options, cb) {
-    fs.readFile(srcPath, function cb(err, content) {
+    fs.readFile(srcPath, function(err, content) {
         if (err) return cb(err);
 
         less.render(content.toString(), {
